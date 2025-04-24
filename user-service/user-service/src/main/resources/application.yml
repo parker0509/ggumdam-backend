@@ -5,16 +5,25 @@ spring:
   application:
     name: user-service
 
-    datasource:
-      url: jdbc:mysql://localhost:3308/chat_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-      username: root
-      password: qwer1234
-      driver-class-name: com.mysql.cj.jdbc.Driver
+  datasource:
+    url: jdbc:mysql://localhost:3307/userDB?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root
+    password: qwer1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://eureka-server:10000/eureka
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect  # 이 부분 추가!!
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+#*eureka:
+  #client:
+    #register-with-eureka: true
+    #fetch-registry: true
+    #service-url:
+      #defaultZone: http://eureka-server:10000/eureka
 

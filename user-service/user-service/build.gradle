@@ -29,11 +29,30 @@ ext {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+/*	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'*/
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	//mysql
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-mustache'
+
+	// jwt
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5' // JSON 직렬화 지원
+
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	//lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+
 }
 
 dependencyManagement {
@@ -44,4 +63,22 @@ dependencyManagement {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+task copyPrivate(type: Copy) {
+	copy {
+		from './submodule-data'
+		include "*.yml"
+		into 'src/main/resources'
+	}
+}
+
+tasks.withType(JavaCompile) {
+	options.compilerArgs << "-parameters"
+}
+
+allprojects {
+	repositories {
+		maven { url 'https://jitpack.io' }
+	}
 }
