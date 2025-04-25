@@ -1,6 +1,7 @@
 package com.example.user_service.dto;
 
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -8,8 +9,11 @@ import lombok.NoArgsConstructor;
 @Getter
 public class RegisterRequest {
 
+    @NotBlank
     private String name;
+    @NotBlank
     private String email;
+    @NotBlank
     private String password;
     private String phone;
 
