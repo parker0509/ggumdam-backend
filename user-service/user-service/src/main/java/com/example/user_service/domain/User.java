@@ -29,5 +29,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private SubscriptionLevel subscriptionLevel;
 
+    private String profileImageUrl;
+
 
 }

@@ -1,9 +1,11 @@
 package com.example.user_service.controller;
 
 
+import com.example.user_service.domain.User;
 import com.example.user_service.dto.ChangePasswordRequest;
 import com.example.user_service.dto.LoginRequest;
 import com.example.user_service.dto.RegisterRequest;
+import com.example.user_service.dto.UserResponseDto;
 import com.example.user_service.service.LoginService;
 import com.example.user_service.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.Optional;
+
 /*
 REST API의 명확한 구분
 보안 및 필터 적용의 범위 설정
@@ -79,5 +83,33 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "비밀번호 변경 중 오류 발생"));
         }
     }
+    @Operation(summary = "이메일로 사용자 정보 조회", description = "project-service 등 외부 서비스에서 유저 정보를 조회할 때 사용")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "조회 성공"),
+            @ApiResponse(responseCode = "404", description = "사용자 없음")
+    })
+
+    @GetMapping("/{email}")
+    public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
+        Optional<User> userOptional = userService.getUserByEmail(email);
+
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            UserResponseDto response = UserResponseDto.builder()
+                    .id(user.getId())
+                    .email(user.getEmail())
+                    .nickname(user.getUsername())
+                    .profileImageUrl(user.getProfileImageUrl())
+                    .build();
+
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("error", "해당 이메일의 사용자를 찾을 수 없습니다."));
+        }
+    }
+
+
+
 
 }

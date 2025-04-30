@@ -2,9 +2,8 @@ package com.example.project_service.domain;
 
 import com.example.project_service.util.StringListConverter;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
 import org.springframework.security.core.userdetails.User;
 
 import java.math.BigDecimal;
@@ -15,12 +14,15 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
+@NoArgsConstructor  // 기본 생성자 추가
+@AllArgsConstructor // (선택) 전체 필드 생성자
 public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String title;
 
     private String description;
@@ -34,9 +36,7 @@ public class Project {
 
     private BigDecimal raisedAmount = BigDecimal.ZERO;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "creator_id", nullable = false)
-    private User creatorName;
+    private String creatorName;
 
     private LocalDateTime startDate;
     private LocalDateTime endDate;
