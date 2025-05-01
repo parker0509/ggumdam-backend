@@ -44,6 +44,8 @@ public class ProjectService {
         String userServiceUrl =
                 "http://localhost:8005/api/auth/"+email;
 
+        System.out.println("userServiceUrl = " + userServiceUrl);
+        System.out.println("ProjectService.createProject "+email);
 
         UserResponseDto UserDto = restTemplate.getForObject(userServiceUrl,UserResponseDto.class);
 
