@@ -24,6 +24,7 @@ public class ProjectRequestDto {
     private String imageUrl; // 이미지 URL은 선택 사항
 
     private List<String> tags;
-
+    
+    private String email; // ✅ 이메일 필드 추가
 }
 

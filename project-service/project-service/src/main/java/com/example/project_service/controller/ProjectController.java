@@ -38,9 +38,8 @@ public class ProjectController {
     }
 
     @PostMapping
-    public ResponseEntity<Project> createProject(@RequestBody ProjectRequestDto dto,
-                                                 @AuthenticationPrincipal CustomUserDetails userDetails) {
-        Project savedProject = projectService.createProject(dto, userDetails.getUsername());
+    public ResponseEntity<Project> createProject(@RequestBody ProjectRequestDto dto) {
+        Project savedProject = projectService.createProject(dto, dto.getEmail());
         System.out.println("dto.getTags() = " + dto.getTags());
         return ResponseEntity.ok(savedProject);
     }

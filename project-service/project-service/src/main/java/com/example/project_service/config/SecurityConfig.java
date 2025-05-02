@@ -20,13 +20,6 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable) // CSRF 비활성화
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/api/room/booking",
-                                "/api/contents/content-form", "api/contents/content-detail/**"
-                        )
-                        .authenticated()
-                        .requestMatchers("/api/projects", "/api/projects/**").permitAll() // ✅ Project JWT -> 이거 추가
-                        .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**"
-                                ,"/api/auth/**","/api/auth/login", "/api/auth/register","/api/projects").permitAll()
                         .anyRequest().permitAll()
                 );
         return http.build();
