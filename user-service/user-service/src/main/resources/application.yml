@@ -20,10 +20,10 @@ spring:
       hibernate:
         format_sql: true
 
-#*eureka:
-  #client:
-    #register-with-eureka: true
-    #fetch-registry: true
-    #service-url:
-      #defaultZone: http://eureka-server:10000/eureka
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:10000/eureka
 
