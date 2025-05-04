@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-auth-db
+    ports:
+      - "3000:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: qwer1234
+      MYSQL_DATABASE: authDB
+      TZ: Asia/Seoul
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
