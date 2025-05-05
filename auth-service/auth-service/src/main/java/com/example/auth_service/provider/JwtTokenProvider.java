@@ -20,12 +20,14 @@ public class JwtTokenProvider {
 
     private Key key;
 
+    // 🟡 Bean 초기화 시점에 Key 객체 생성
     @PostConstruct
     protected void init() {
         this.key = Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
-    // ✅ 토큰 생성
+
+    // ✅ JWT 토큰 생성 (email을 subject로 사용)
     public String createToken(String email) {
         Claims claims = Jwts.claims().setSubject(email); // subject에 이메일 설정
         Date now = new Date();

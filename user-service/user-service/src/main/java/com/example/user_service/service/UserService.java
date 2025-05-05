@@ -1,7 +1,6 @@
 package com.example.user_service.service;
 
 import com.example.user_service.domain.User;
-import com.example.user_service.dto.ChangePasswordRequest;
 import com.example.user_service.dto.RegisterRequest;
 import com.example.user_service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
