@@ -5,7 +5,7 @@ services:
     image: mysql:8.0
     container_name: mysql-auth-db
     ports:
-      - "3000:3306"
+      - "3008:3306"
     environment:
       MYSQL_ROOT_PASSWORD: qwer1234
       MYSQL_DATABASE: authDB
