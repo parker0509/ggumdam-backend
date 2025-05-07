@@ -12,6 +12,12 @@ import lombok.NoArgsConstructor;
 public class UserResponseDto {
     private Long id;
     private String email;
-    private String nickname;
+    private String username;
     private String profileImageUrl;
+
+    // 생성자를 email, nickname으로만 받는 경우 추가
+    public UserResponseDto(String email, String username) {
+        this.email = email;
+        this.username = username;
+    }
 }

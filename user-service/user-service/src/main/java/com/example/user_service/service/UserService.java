@@ -1,13 +1,14 @@
 package com.example.user_service.service;
 
 import com.example.user_service.domain.User;
+import com.example.user_service.dto.ChangePasswordRequest;
 import com.example.user_service.dto.RegisterRequest;
+import com.example.user_service.dto.UserResponseDto;
 import com.example.user_service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.Optional;
 
 @Service
@@ -37,7 +38,7 @@ public class UserService {
         User newUser = new User();
 
         newUser.setEmail(registerRequest.getEmail());
-        newUser.setUsername(registerRequest.getName());
+        newUser.setUsername(registerRequest.getUsername());
         newUser.setPhone(registerRequest.getPhone());
         newUser.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
 
@@ -58,12 +59,23 @@ public class UserService {
     @Transactional
     public void changePassword(String token, ChangePasswordRequest request) {
 
-        User user = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new RuntimeException("해당 ID의 사용자가 없습니다."));
+        String userEmail = request.getEmail();
+        System.out.println("요청된 이메일: " + userEmail);
+
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new RuntimeException("사용자 없음"));
 
         if(!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())){
             throw new IllegalArgumentException("현재 비밀번호가 일치하지 않습니다.");
         }
+
+        if(passwordEncoder.matches(request.getNewPassword(), user.getPassword())){
+            throw new IllegalArgumentException("현재 비밀번호와 같습니다.");
+        }
+        String encodeNewPassword = passwordEncoder.encode(request.getNewPassword());
+        user.setPassword(encodeNewPassword);
+
+        userRepository.save(user);
     }
 
 /*
@@ -109,6 +121,18 @@ public class UserService {
             throw new RuntimeException("User not found with id : " + id);
 
         }
+    }
+
+    public UserResponseDto verifyUserCredentials(String email, String password) {
+        // 이메일로 사용자 찾기
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("사용자가 존재하지 않습니다."));
+
+        // 비밀번호 일치 여부 확인
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new RuntimeException("비밀번호가 일치하지 않습니다.");
+        }
+        // 사용자 정보를 응답 객체로 반환
+        return new UserResponseDto(user.getEmail(), user.getUsername());
     }
 
 }
