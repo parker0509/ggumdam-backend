@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: user-service
-          image: your-dockerhub-username/user-service:latest
+          image: your-dockerhub-name/user-service:latest
           ports:
             - containerPort: 8005
           env:

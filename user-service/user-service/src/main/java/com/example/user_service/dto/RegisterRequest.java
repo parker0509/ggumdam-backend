@@ -10,15 +10,15 @@ import lombok.NoArgsConstructor;
 public class RegisterRequest {
 
     @NotBlank
-    private String name;
+    private String username;
     @NotBlank
     private String email;
     @NotBlank
     private String password;
     private String phone;
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setEmail(String email) {
@@ -35,6 +35,6 @@ public class RegisterRequest {
 
     @Override
     public String toString(){
-        return "RegisterRequest{name='" + name + "', email='" + email + "', phone='" + phone + "'}";
+        return "RegisterRequest{username='" + username + "', email='" + email + "', phone='" + phone + "'}";
     }
 }
