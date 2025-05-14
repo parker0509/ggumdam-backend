@@ -135,5 +135,10 @@ public class UserService {
         return new UserResponseDto(user.getEmail(), user.getUsername());
     }
 
+    public Optional<User> getUserById(Long id) {
+
+        return userRepository.findById(id);
+
+    }
 }
 

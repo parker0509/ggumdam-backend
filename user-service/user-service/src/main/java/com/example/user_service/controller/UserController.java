@@ -87,6 +87,28 @@ public class UserController {
 
         return ResponseEntity.ok("비밀번호 변경 완료");
     }
+
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable Long id) {
+        Optional<User> userOptional = userService.getUserById(id);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            UserResponseDto response = UserResponseDto.builder()
+                    .id(user.getId())
+                    .email(user.getEmail())
+                    .username(user.getUsername())
+                    .profileImageUrl(user.getProfileImageUrl())
+                    .build();
+
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("error", "해당 ID의 사용자를 찾을 수 없습니다."));
+        }
+    }
+
+
 }
 
 
