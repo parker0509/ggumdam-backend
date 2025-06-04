@@ -20,4 +20,10 @@ public class FreeOrderService {
     public List<FreeOrder> getAllOrders() {
         return freeOrderRepository.findAll();
     }
+
+    public void incrementLikes(Long id){
+        FreeOrder order = freeOrderRepository.findById(id).orElseThrow(() -> new RuntimeException("Not Found"));
+        order.setLikes(order.getLikes() + 1);
+        freeOrderRepository.save(order);
+    }
 }

@@ -21,7 +21,14 @@ public class FreeOrder {
     private String productName;
     private int quantity;
     private LocalDateTime orderDate;
-
-    // getters & setters
+    private int participants;
+    private int achievement;
+    private String companyName;
+    private int amountRaised;
+    private int daysLeft;
+    private String imageUrl;
+    private String shortDescription;
+    private int supporters;
+    private int likes;
 }
 
