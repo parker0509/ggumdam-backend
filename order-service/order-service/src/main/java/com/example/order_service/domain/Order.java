@@ -2,6 +2,7 @@ package com.example.order_service.domain;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,17 +15,20 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="orders")
+@Table(name = "orders")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userid;
-    private Long projectid;
-
+    @NotNull
+    private Long userId;
+    @NotNull
+    private Long projectId;
+    @NotNull
     private int quantity;
+    @NotNull
     private int totalAmount;
 
     @Enumerated(EnumType.STRING)
