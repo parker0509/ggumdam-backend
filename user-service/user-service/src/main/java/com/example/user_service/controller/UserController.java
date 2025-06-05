@@ -89,7 +89,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/users/{id}")
     public ResponseEntity<?> getUserById(@PathVariable Long id) {
         Optional<User> userOptional = userService.getUserById(id);
         if (userOptional.isPresent()) {
