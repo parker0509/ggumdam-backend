@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/user-service.iml" filepath="$PROJECT_DIR$/.idea/user-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/user-service.user-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/user-service.user-service.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/user-service.user-service.main~2.iml" filepath="$PROJECT_DIR$/.idea/modules/user-service.user-service.main~2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/user-service.user-service.main~1.iml" filepath="$PROJECT_DIR$/.idea/modules/user-service.user-service.main~1.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/user-service.user-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/user-service.user-service.test.iml" />
     </modules>
   </component>
