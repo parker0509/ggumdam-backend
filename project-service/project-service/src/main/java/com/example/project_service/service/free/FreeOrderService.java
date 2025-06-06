@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,5 +26,9 @@ public class FreeOrderService {
         FreeOrder order = freeOrderRepository.findById(id).orElseThrow(() -> new RuntimeException("Not Found"));
         order.setLikes(order.getLikes() + 1);
         freeOrderRepository.save(order);
+    }
+
+    public FreeOrder findById(Long id) {
+        return freeOrderRepository.findById(id).orElse(null);
     }
 }

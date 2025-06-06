@@ -1,6 +1,7 @@
 package com.example.project_service.controller.free;
 
 import com.example.project_service.domain.free.FreeOrder;
+import com.example.project_service.dto.free.FreeOrderDto;
 import com.example.project_service.repository.free.FreeOrderRepository;
 import com.example.project_service.service.free.FreeOrderService;
 import lombok.RequiredArgsConstructor;
@@ -47,4 +48,6 @@ public class FreeOrderController {
         freeOrderService.incrementLikes(id);
         return ResponseEntity.ok().build();
     }
+
+
 }
