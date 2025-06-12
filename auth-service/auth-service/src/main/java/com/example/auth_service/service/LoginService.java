@@ -11,6 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Map;
+
 @Service
 public class LoginService {
 
@@ -26,11 +28,17 @@ public class LoginService {
     }
 
     // 로그인 검증 기능
-    public String loginUserService(String email, String password) {
-        LoginVerificationRequest req = new LoginVerificationRequest(email, password);
-        UserResponse user = userClient.verifyLogin(req); // 비밀번호 비교는 user-service에서
-        return jwtTokenProvider.createToken(user.getEmail());
+
+    public Map<String, String> loginUserService(String email, String password) {
+        // (1) 로그인 검증 (생략)
+
+        String accessToken = jwtTokenProvider.createToken(email);
+        String refreshToken = jwtTokenProvider.createRefreshToken(email); // 리프레시 토큰 생성
+
+        // 둘 다 Map이나 DTO에 담아 리턴
+        return Map.of(
+                "accessToken", accessToken,
+                "refreshToken", refreshToken
+        );
     }
-
-
 }

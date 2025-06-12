@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.cloud.openfeign.FeignClient;
 
+import java.util.Map;
+
 /*
 1. 유저 정보를 받아와서 로그인 인증
     ✅ FeignClient로 user-service에서 사용자 이메일 기반 정보 가져오기 (UserClient)
@@ -38,6 +40,9 @@ public interface UserClient {
             @RequestHeader("Authorization") String token,
             @RequestBody ChangePasswordRequest request
     );
+
+    @PostMapping("/api/user/logout")
+    ResponseEntity<String> logout(@RequestHeader("Authorization") String token);
 }
 
 

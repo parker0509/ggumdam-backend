@@ -1,3 +1,4 @@
+/*
 package com.example.auth_service.filter;
 
 
@@ -48,7 +49,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             // 6. SecurityContext에 인증 객체 저장 (요청이 인증된 것으로 간주됨)
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-        // 7. 다음 필터로 요청 전달
+
         filterChain.doFilter(request, response);
     }
 
@@ -62,3 +63,4 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         return null;
     }
 }
+*/

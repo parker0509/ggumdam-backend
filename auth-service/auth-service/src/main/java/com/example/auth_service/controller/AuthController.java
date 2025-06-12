@@ -2,10 +2,12 @@ package com.example.auth_service.controller;
 
 import com.example.auth_service.dto.*;
 import com.example.auth_service.feign.UserClient;
+import com.example.auth_service.provider.JwtTokenProvider;
 import com.example.auth_service.service.LoginService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class AuthController {
     private final RestTemplate restTemplate;
     private final UserClient userClient;
 
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+
     @Operation(summary = "로그인", description = "사용자의 로그인 처리 및 JWT 토큰 반환")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "로그인 성공"),
@@ -35,11 +40,22 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
-            String token = loginService.loginUserService(loginRequest.getEmail(), loginRequest.getPassword());
-            return ResponseEntity.ok(Map.of("token", token));
+            Map<String, String> tokens = loginService.loginUserService(loginRequest.getEmail(), loginRequest.getPassword());
+            return ResponseEntity.ok(tokens);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", e.getMessage()));
         }
+    }
+
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletRequest request) {
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return ResponseEntity.badRequest().body("토큰 누락 또는 형식 오류");
+        }
+
+        return userClient.logout(authHeader);  // ✅ 헤더 그대로 넘김
     }
 
 
@@ -67,6 +83,26 @@ public class AuthController {
         String token = authorizationHeader.replace("Bearer ", "");
         return userClient.changePassword("Bearer " + token, request);
     }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<?> refreshToken(@RequestBody Map<String, String> request) {
+        String refreshToken = request.get("refreshToken");
+        System.out.println("받은 refreshToken 값: " + refreshToken);
+
+        if (refreshToken == null || refreshToken.isBlank()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("리프레시 토큰이 없습니다.");
+        }
+
+        if (!jwtTokenProvider.validateToken(refreshToken)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("유효하지 않은 리프레시 토큰입니다.");
+        }
+
+        String email = jwtTokenProvider.getEmailFromToken(refreshToken);
+        String newAccessToken = jwtTokenProvider.createToken(email);
+        return ResponseEntity.ok(Map.of("accessToken", newAccessToken));
+    }
+
+
 
     /*@Operation(summary = "로그인 검증", description = "사용자 이메일과 비밀번호를 검증하여 로그인 인증 처리")
     @ApiResponses(value = {
