@@ -6,6 +6,8 @@ import com.example.user_service.dto.RegisterRequest;
 import com.example.user_service.dto.UserResponseDto;
 import com.example.user_service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -88,7 +90,6 @@ public class UserService {
 
     */
 
-    //Update ( 갱신 )
     public void updateUser(Long id, User userDetails) {
 
         Optional<User> userOpt = userRepository.findById(id);
@@ -105,7 +106,6 @@ public class UserService {
 
     }
 
-    //Delete (삭제)
     public void deleteUser(Long id) {
 
         Optional<User> userOpt = userRepository.findById(id);
@@ -124,14 +124,13 @@ public class UserService {
     }
 
     public UserResponseDto verifyUserCredentials(String email, String password) {
-        // 이메일로 사용자 찾기
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("사용자가 존재하지 않습니다."));
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("사용자가 존재하지 않습니다."));
 
-        // 비밀번호 일치 여부 확인
         if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new RuntimeException("비밀번호가 일치하지 않습니다.");
+            throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
         }
-        // 사용자 정보를 응답 객체로 반환
+
         return new UserResponseDto(user.getEmail(), user.getUsername());
     }
 
@@ -140,5 +139,7 @@ public class UserService {
         return userRepository.findById(id);
 
     }
+
+
 }
 
