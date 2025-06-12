@@ -5,27 +5,38 @@ import com.example.user_service.dto.ChangePasswordRequest;
 import com.example.user_service.dto.LoginVerificationRequest;
 import com.example.user_service.dto.RegisterRequest;
 import com.example.user_service.dto.UserResponseDto;
+import com.example.user_service.service.JwtBlacklistService;
 import com.example.user_service.service.UserService;
+import com.example.user_service.util.CustomUserDetails;
+import com.example.user_service.util.JwtUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    @Autowired
+    private JwtBlacklistService jwtBlacklistService;
+
     @GetMapping
-    public ResponseEntity<String> testController(){
+    public ResponseEntity<String> testController() {
         return ResponseEntity.status(200).body("확인 되었습니다.");
     }
 
@@ -46,7 +57,6 @@ public class UserController {
                     .id(user.getId())
                     .email(user.getEmail())
                     .username(user.getUsername())
-                    .profileImageUrl(user.getProfileImageUrl())
                     .build();
 
             return ResponseEntity.ok(response);
@@ -98,7 +108,6 @@ public class UserController {
                     .id(user.getId())
                     .email(user.getEmail())
                     .username(user.getUsername())
-                    .profileImageUrl(user.getProfileImageUrl())
                     .build();
 
             return ResponseEntity.ok(response);
@@ -107,8 +116,30 @@ public class UserController {
                     .body(Map.of("error", "해당 ID의 사용자를 찾을 수 없습니다."));
         }
     }
+    @GetMapping("/me")
+    public ResponseEntity<?> getCurrentUser(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        if (userDetails == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("error", "인증 정보가 없습니다. 다시 로그인 해주세요."));
+        }
+        User user = userDetails.getUser();
+        return ResponseEntity.ok(UserResponseDto.from(user));
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(@RequestHeader("Authorization") String header) {
+        if (header == null || !header.startsWith("Bearer ")) {
+            return ResponseEntity.badRequest().body("토큰 누락 또는 형식 오류");
+        }
+
+        String token = header.substring(7); // "Bearer " 제거
+        System.out.println("로그아웃 요청 받은 토큰: " + token);
+
+        // 토큰 유효성 검사 및 처리
+        return ResponseEntity.ok("로그아웃 성공");
 
 
+    }
 }
 
 

@@ -5,6 +5,10 @@ spring:
   application:
     name: user-service
 
+  jwt:
+    secret: ${JWT_SECRET}  # ✅ 직접 입력
+    refresh: ${JWT_REFRESH}
+
   datasource:
     url: jdbc:mysql://localhost:3307/userDB?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root

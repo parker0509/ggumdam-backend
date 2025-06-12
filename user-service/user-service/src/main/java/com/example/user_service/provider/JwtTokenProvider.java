@@ -18,6 +18,7 @@ public class JwtTokenProvider {
 
     private final long tokenValidityInMilliseconds = 1000 * 60 * 60 * 24; // 24시간
 
+
     private Key key;
 
     @PostConstruct
@@ -25,19 +26,6 @@ public class JwtTokenProvider {
         this.key = Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
-    // ✅ 토큰 생성
-    public String createToken(String email) {
-        Claims claims = Jwts.claims().setSubject(email); // subject에 이메일 설정
-        Date now = new Date();
-        Date validity = new Date(now.getTime() + tokenValidityInMilliseconds);
-
-        return Jwts.builder()
-                .setClaims(claims)
-                .setIssuedAt(now)
-                .setExpiration(validity)
-                .signWith(key, SignatureAlgorithm.HS256)
-                .compact();
-    }
 
     // ✅ 토큰에서 이메일 추출
     public String getEmailFromToken(String token) {
@@ -60,4 +48,6 @@ public class JwtTokenProvider {
             return false;
         }
     }
+
+
 }
