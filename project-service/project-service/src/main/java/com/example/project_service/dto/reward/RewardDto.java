@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+import java.util.Optional;
+
 @Getter
 @Builder
 @NoArgsConstructor
@@ -19,6 +22,18 @@ public class RewardDto {
     private String deliveryDate;
     private int limitCount;
     private int remaining;
+
+    public RewardDto(Reward reward) {
+        this.id = reward.getId();
+        this.title = reward.getTitle();
+        this.desc = reward.getDescription();
+        this.price = reward.getPrice();
+        this.shippingFee = reward.getShippingFee();
+        this.deliveryDate = reward.getDeliveryDate() != null ? reward.getDeliveryDate().toString() : null;
+        this.limitCount = reward.getLimitCount();
+        this.remaining = reward.getRemaining();
+    }
+
 
     public static RewardDto from(Reward reward) {
         return RewardDto.builder()

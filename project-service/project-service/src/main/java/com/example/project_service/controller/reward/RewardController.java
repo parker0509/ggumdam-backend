@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController
 @RequiredArgsConstructor
 public class RewardController {
@@ -20,7 +21,7 @@ public class RewardController {
     private final RewardService rewardService;
     private final FreeOrderService freeOrderService;
 
-    @GetMapping("/api/free-orders/{Id}/rewards")
+    @GetMapping("/api/free-orders/{id}/rewards")
     public ResponseEntity<List<RewardDto>> getRewards(@PathVariable(name = "id") Long orderId) {
         List<Reward> rewards = rewardService.getRewardsByOrderId(orderId);
         return ResponseEntity.ok(rewards.stream().map(RewardDto::from).toList());
@@ -37,5 +38,17 @@ public class RewardController {
         // 리워드 생성
         RewardDto rewardDto = rewardService.createReward(requestDto, freeOrder);
         return ResponseEntity.ok(rewardDto);
+    }
+
+    @GetMapping("/api/free-orders/rewards/{rewardId}")
+    public ResponseEntity<RewardDto> getReward(
+            @PathVariable(name = "rewardId") Long rewardId) {
+
+        Optional<Reward> reward = rewardService.findById(rewardId);
+        if (reward.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        RewardDto dto = RewardDto.from(reward.get());
+        return ResponseEntity.ok(dto);
     }
 }

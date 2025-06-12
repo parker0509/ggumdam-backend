@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RewardService {
@@ -25,5 +26,10 @@ public class RewardService {
         reward.setFreeOrder(freeOrder);  // 연관관계 설정
         Reward saved = rewardRepository.save(reward);
         return RewardDto.from(saved);
+    }
+
+
+    public Optional<Reward> findById(Long id) {
+        return rewardRepository.findById(id);
     }
 }
