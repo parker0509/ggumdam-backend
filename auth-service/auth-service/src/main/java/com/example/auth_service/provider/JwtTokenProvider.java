@@ -17,6 +17,7 @@ public class JwtTokenProvider {
     private String secretKey;
 
     private final long tokenValidityInMilliseconds = 1000 * 60 * 60 * 24; // 24시간
+    private final long refreshTokenValidityInMilliseconds = 1000 * 60 * 60 * 24 * 7; // 7일
 
     private Key key;
 
@@ -26,6 +27,18 @@ public class JwtTokenProvider {
         this.key = Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
+    public String createRefreshToken(String email) {
+        Claims claims = Jwts.claims().setSubject(email);
+        Date now = new Date();
+        Date validity = new Date(now.getTime() + refreshTokenValidityInMilliseconds);
+
+        return Jwts.builder()
+                .setClaims(claims)
+                .setIssuedAt(now)
+                .setExpiration(validity)
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
+    }
 
     // ✅ JWT 토큰 생성 (email을 subject로 사용)
     public String createToken(String email) {
