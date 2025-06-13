@@ -6,6 +6,10 @@ spring:
   application:
     name: auth-service
 
+  redis:
+    host: localhost
+    port: 6379
+
   datasource:
     url: jdbc:mysql://localhost:3008/authDB?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root
@@ -13,8 +17,8 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jwt:
-    secret: ${JWT_SECRET}  # ? JWT_SECRET? ?? ????? ??
-    expiration: 86400  # ?: JWT ???? (1?) ?? ??
+    secret: h7iV5u3tG9PfN6wYQlXrZqvAtFsJDw2s8KME+fClTcw=
+    expiration: 86400
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect  # MySQL 8? ?? ??

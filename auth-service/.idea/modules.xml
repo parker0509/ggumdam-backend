@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/auth-service.iml" filepath="$PROJECT_DIR$/.idea/auth-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/auth-service.auth-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/auth-service.auth-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/auth-service.auth-service.main~1.iml" filepath="$PROJECT_DIR$/.idea/modules/auth-service.auth-service.main~1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/auth-service.auth-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/auth-service.auth-service.test.iml" />
     </modules>
   </component>
 </project>

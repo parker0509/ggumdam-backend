@@ -1,7 +1,7 @@
 package com.example.auth_service.provider;
 
-
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,13 +18,27 @@ public class JwtTokenProvider {
 
     private final long tokenValidityInMilliseconds = 1000 * 60 * 60 * 24; // 24시간
     private final long refreshTokenValidityInMilliseconds = 1000 * 60 * 60 * 24 * 7; // 7일
-
     private Key key;
 
-    // 🟡 Bean 초기화 시점에 Key 객체 생성
+    // ✅ 여기 수정된 부분!!
     @PostConstruct
     protected void init() {
-        this.key = Keys.hmacShaKeyFor(secretKey.getBytes());
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+        this.key = Keys.hmacShaKeyFor(keyBytes);
+        System.out.println("🔑 JWT Key 초기화 완료");
+    }
+
+    public String createToken(String email) {
+        Claims claims = Jwts.claims().setSubject(email);
+        Date now = new Date();
+        Date validity = new Date(now.getTime() + tokenValidityInMilliseconds);
+
+        return Jwts.builder()
+                .setClaims(claims)
+                .setIssuedAt(now)
+                .setExpiration(validity)
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
     }
 
     public String createRefreshToken(String email) {
@@ -40,21 +54,6 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    // ✅ JWT 토큰 생성 (email을 subject로 사용)
-    public String createToken(String email) {
-        Claims claims = Jwts.claims().setSubject(email); // subject에 이메일 설정
-        Date now = new Date();
-        Date validity = new Date(now.getTime() + tokenValidityInMilliseconds);
-
-        return Jwts.builder()
-                .setClaims(claims)
-                .setIssuedAt(now)
-                .setExpiration(validity)
-                .signWith(key, SignatureAlgorithm.HS256)
-                .compact();
-    }
-
-    // ✅ 토큰에서 이메일 추출
     public String getEmailFromToken(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(key)
@@ -64,7 +63,6 @@ public class JwtTokenProvider {
                 .getSubject();
     }
 
-    // ✅ 토큰 유효성 검사
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
@@ -74,5 +72,15 @@ public class JwtTokenProvider {
             System.out.println("JWT 검증 실패: " + e.getMessage());
             return false;
         }
+    }
+
+    public long getExpiration(String token) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(key) // ✅ 여기도 key 객체를 써야 함
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+
+        return claims.getExpiration().getTime() - System.currentTimeMillis();
     }
 }

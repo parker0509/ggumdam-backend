@@ -4,10 +4,12 @@ import com.example.auth_service.dto.*;
 import com.example.auth_service.feign.UserClient;
 import com.example.auth_service.provider.JwtTokenProvider;
 import com.example.auth_service.service.LoginService;
+import com.example.auth_service.service.RedisService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,7 @@ public class AuthController {
     private final LoginService loginService;
     private final RestTemplate restTemplate;
     private final UserClient userClient;
+    private final RedisService redisService;
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
@@ -38,24 +41,51 @@ public class AuthController {
     })
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        try {
-            Map<String, String> tokens = loginService.loginUserService(loginRequest.getEmail(), loginRequest.getPassword());
-            return ResponseEntity.ok(tokens);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", e.getMessage()));
-        }
+    public ResponseEntity<?> login(@RequestBody LoginRequest request, HttpServletResponse response) {
+        Map<String, String> tokens = loginService.loginUserService(request.getEmail(), request.getPassword());
+        String accessToken = tokens.get("accessToken");
+        String refreshToken = tokens.get("refreshToken");
+
+        // 리프레시 토큰을 HttpOnly 쿠키로 설정
+        ResponseCookie refreshCookie = ResponseCookie.from("refreshToken", refreshToken)
+                .httpOnly(true)
+                .secure(false) // ⚠️ 배포 시 true
+                .path("/")
+                .sameSite("Lax") // or "Strict", "None"
+                .maxAge(7 * 24 * 60 * 60) // 7일
+                .build();
+
+        response.setHeader("Set-Cookie", refreshCookie.toString());
+
+        // accessToken만 프론트로 전달
+        return ResponseEntity.ok(Map.of("accessToken", accessToken));
     }
 
 
     @PostMapping("/logout")
     public ResponseEntity<String> logout(HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
+        System.out.println("Authorization 헤더: " + authHeader);  // <--- 이걸로 실제 값 확인
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return ResponseEntity.badRequest().body("토큰 누락 또는 형식 오류");
         }
 
-        return userClient.logout(authHeader);  // ✅ 헤더 그대로 넘김
+        String accessToken = authHeader.substring(7); // "Bearer " 이후 토큰값만 추출
+
+        // 토큰이 유효한지 검증
+        if (!jwtTokenProvider.validateToken(accessToken)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("유효하지 않은 토큰입니다.");
+        }
+
+        // 토큰 만료시간 계산 (남은 시간)
+        long expiration = jwtTokenProvider.getExpiration(accessToken);
+
+        // Redis에 해당 accessToken을 블랙리스트로 등록 (남은 만료시간만큼 저장)
+        redisService.setBlacklist(accessToken, "logout", expiration);
+
+        // 만약 refresh token도 쿠키나 헤더에서 전달받았다면 같이 삭제 처리 가능
+
+        return ResponseEntity.ok("로그아웃 되었습니다.");
     }
 
 
@@ -84,11 +114,9 @@ public class AuthController {
         return userClient.changePassword("Bearer " + token, request);
     }
 
-    @PostMapping("/refresh")
-    public ResponseEntity<?> refreshToken(@RequestBody Map<String, String> request) {
-        String refreshToken = request.get("refreshToken");
-        System.out.println("받은 refreshToken 값: " + refreshToken);
 
+    @PostMapping("/refresh")
+    public ResponseEntity<?> refreshToken(@CookieValue(value = "refreshToken", required = false) String refreshToken) {
         if (refreshToken == null || refreshToken.isBlank()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("리프레시 토큰이 없습니다.");
         }
@@ -99,8 +127,10 @@ public class AuthController {
 
         String email = jwtTokenProvider.getEmailFromToken(refreshToken);
         String newAccessToken = jwtTokenProvider.createToken(email);
+
         return ResponseEntity.ok(Map.of("accessToken", newAccessToken));
     }
+
 
 
 
