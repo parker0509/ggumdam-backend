@@ -13,5 +13,15 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
 
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis-auth
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: always
+
 volumes:
   mysql-data:
+  redis-data:
