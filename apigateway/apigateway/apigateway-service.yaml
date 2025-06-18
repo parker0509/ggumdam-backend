@@ -1,0 +1,13 @@
+# 6. apigateway-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: apigateway
+spec:
+  selector:
+    app: apigateway
+  ports:
+    - protocol: TCP
+      port: 9000
+      targetPort: 9000
+  type: NodePort
