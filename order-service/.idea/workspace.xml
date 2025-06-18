@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="df3b73ba-8809-441b-9d6b-53533f2f3475" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/../auth-service/auth-service/src/main/java/com/example/auth_service/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/auth-service/src/main/java/com/example/auth_service/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth-service/auth-service/src/main/java/com/example/auth_service/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/auth-service/src/main/java/com/example/auth_service/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth-service/auth-service/src/main/java/com/example/auth_service/dto/UserResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/auth-service/src/main/java/com/example/auth_service/dto/UserResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth-service/auth-service/src/main/java/com/example/auth_service/feign/UserClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/auth-service/src/main/java/com/example/auth_service/feign/UserClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth-service/auth-service/src/main/java/com/example/auth_service/filter/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/auth-service/src/main/java/com/example/auth_service/filter/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth-service/auth-service/src/main/java/com/example/auth_service/provider/JwtTokenProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/auth-service/src/main/java/com/example/auth_service/provider/JwtTokenProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payment-service/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../payment-service/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/controller/reward/RewardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/controller/reward/RewardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/dto/reward/RewardDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/dto/reward/RewardDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/repository/reward/RewardRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/repository/reward/RewardRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/service/reward/RewardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/service/reward/RewardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-service/user-service/src/main/java/com/example/user_service/config/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-service/user-service/src/main/java/com/example/user_service/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../user-service/user-service/src/main/java/com/example/user_service/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-service/user-service/src/main/java/com/example/user_service/dto/UserResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../user-service/user-service/src/main/java/com/example/user_service/dto/UserResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-service/user-service/src/main/java/com/example/user_service/filter/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../user-service/user-service/src/main/java/com/example/user_service/filter/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-service/user-service/src/main/java/com/example/user_service/provider/JwtTokenProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/../user-service/user-service/src/main/java/com/example/user_service/provider/JwtTokenProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-service/user-service/src/main/java/com/example/user_service/service/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../user-service/user-service/src/main/java/com/example/user_service/service/LoginService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-service/user-service/src/main/java/com/example/user_service/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../user-service/user-service/src/main/java/com/example/user_service/service/UserService.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/order-service">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Dockerfile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2xJJQJ0VcoxdlzT2VaW8hfwpEP2" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/my-project/order-service&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  }
+}</component>
+  <component name="RunManager" selected="애플리케이션.OrderServiceApplication">
+    <configuration name="OrderServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.order_service.OrderServiceApplication" />
+      <module name="order-service.order-service.main~1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.order_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="order-service: Compose 배포" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="order-service/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="애플리케이션.OrderServiceApplication" />
+        <item itemvalue="Docker.order-service: Compose 배포" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="df3b73ba-8809-441b-9d6b-53533f2f3475" name="변경" comment="" />
+      <created>1747650225855</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1747650225855</updated>
+    </task>
+    <servers />
+  </component>
+</project>

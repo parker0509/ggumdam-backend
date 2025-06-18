@@ -1,0 +1,43 @@
+server:
+  port: 8000
+
+spring:
+
+  application:
+    name: auth-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3008/authDB?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root
+    password: qwer1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jwt:
+    secret: ${JWT_SECRET}  # ? JWT_SECRET? ?? ????? ??
+    expiration: 86400  # ?: JWT ???? (1?) ?? ??
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect  # MySQL 8? ?? ??
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  profiles:
+    active: dev  # ??? ?? ??
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:10000/eureka  # ??? ?? ??, MSA ??? ?? ??
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000  # Feign ????? ?? ????
+        readTimeout: 5000     # Feign ????? ?? ????
