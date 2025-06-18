@@ -21,6 +21,7 @@ public class LoginService {
     private final JwtTokenProvider jwtTokenProvider;
     private final RefreshTokenService refreshTokenService;
 
+    @Autowired
     public LoginService(UserClient userClient, BCryptPasswordEncoder passwordEncoder, JwtTokenProvider jwtTokenProvider, RefreshTokenService refreshTokenService) {
         this.userClient = userClient;
         this.passwordEncoder = passwordEncoder;
@@ -28,15 +29,13 @@ public class LoginService {
         this.refreshTokenService = refreshTokenService;
     }
 
-// 로그인 검증 기능
+    // 로그인 검증 기능
 
     public Map<String, String> loginUserService(String email, String password) {
         // (1) 로그인 검증 (생략)
 
         String accessToken = jwtTokenProvider.createToken(email);
         String refreshToken = jwtTokenProvider.createRefreshToken(email); // 리프레시 토큰 생성
-
-        refreshTokenService.saveRefreshToken(email, refreshToken); // Redis 저장
 
         // 둘 다 Map이나 DTO에 담아 리턴
         return Map.of(

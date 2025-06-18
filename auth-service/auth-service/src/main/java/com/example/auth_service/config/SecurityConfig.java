@@ -32,9 +32,8 @@ public class SecurityConfig {
                                 "/api/auth/login",
                                 "/api/auth/register",
                                 "/api/auth/reissue",
-                                "/api/auth/logout"
+                                "/login"
                         ).permitAll()
-                        .anyRequest().denyAll() // 그 외 요청은 차단 (보안 강화를 위해)
                 );
 
         return http.build();

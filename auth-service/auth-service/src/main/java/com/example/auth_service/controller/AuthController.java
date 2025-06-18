@@ -5,6 +5,7 @@ import com.example.auth_service.feign.UserClient;
 import com.example.auth_service.provider.JwtTokenProvider;
 import com.example.auth_service.service.LoginService;
 import com.example.auth_service.service.RedisService;
+import com.example.auth_service.service.RefreshTokenService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -20,19 +21,25 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Map;
 
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    @Autowired
-    private final LoginService loginService;
-    private final RestTemplate restTemplate;
-    private final UserClient userClient;
-    private final RedisService redisService;
+    private LoginService loginService;
+    private RestTemplate restTemplate;
+    private UserClient userClient;
+    private RedisService redisService;
+    private JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    private JwtTokenProvider jwtTokenProvider;
+    public AuthController(LoginService loginService, RestTemplate restTemplate, UserClient userClient, RedisService redisService, JwtTokenProvider jwtTokenProvider) {
+        this.loginService = loginService;
+        this.restTemplate = restTemplate;
+        this.userClient = userClient;
+        this.redisService = redisService;
+        this.jwtTokenProvider = jwtTokenProvider;
+    }
 
     @Operation(summary = "로그인", description = "사용자의 로그인 처리 및 JWT 토큰 반환")
     @ApiResponses(value = {
@@ -41,51 +48,27 @@ public class AuthController {
     })
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request, HttpServletResponse response) {
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         Map<String, String> tokens = loginService.loginUserService(request.getEmail(), request.getPassword());
         String accessToken = tokens.get("accessToken");
         String refreshToken = tokens.get("refreshToken");
 
-        // 리프레시 토큰을 HttpOnly 쿠키로 설정
-        ResponseCookie refreshCookie = ResponseCookie.from("refreshToken", refreshToken)
-                .httpOnly(true)
-                .secure(false) // ⚠️ 배포 시 true
-                .path("/")
-                .sameSite("Lax") // or "Strict", "None"
-                .maxAge(7 * 24 * 60 * 60) // 7일
-                .build();
-
-        response.setHeader("Set-Cookie", refreshCookie.toString());
-
-        // accessToken만 프론트로 전달
-        return ResponseEntity.ok(Map.of("accessToken", accessToken));
+        // accessToken, refreshToken 모두 프론트로 전달
+        return ResponseEntity.ok(Map.of(
+                "accessToken", accessToken,
+                "refreshToken", refreshToken
+        ));
     }
 
 
     @PostMapping("/logout")
     public ResponseEntity<String> logout(HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
-        System.out.println("Authorization 헤더: " + authHeader);  // <--- 이걸로 실제 값 확인
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return ResponseEntity.badRequest().body("토큰 누락 또는 형식 오류");
         }
 
-        String accessToken = authHeader.substring(7); // "Bearer " 이후 토큰값만 추출
-
-        // 토큰이 유효한지 검증
-        if (!jwtTokenProvider.validateToken(accessToken)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("유효하지 않은 토큰입니다.");
-        }
-
-        // 토큰 만료시간 계산 (남은 시간)
-        long expiration = jwtTokenProvider.getExpiration(accessToken);
-
-        // Redis에 해당 accessToken을 블랙리스트로 등록 (남은 만료시간만큼 저장)
-        redisService.setBlacklist(accessToken, "logout", expiration);
-
-        // 만약 refresh token도 쿠키나 헤더에서 전달받았다면 같이 삭제 처리 가능
-
-        return ResponseEntity.ok("로그아웃 되었습니다.");
+        return userClient.logout(authHeader);  // ✅ 헤더 그대로 넘김
     }
 
 
@@ -116,10 +99,12 @@ public class AuthController {
 
 
     @PostMapping("/refresh")
-    public ResponseEntity<?> refreshToken(@CookieValue(value = "refreshToken", required = false) String refreshToken) {
-        if (refreshToken == null || refreshToken.isBlank()) {
+    public ResponseEntity<?> refreshToken(@RequestHeader("Authorization") String refreshHeader) {
+        if (refreshHeader == null || !refreshHeader.startsWith("Bearer ")) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("리프레시 토큰이 없습니다.");
         }
+
+        String refreshToken = refreshHeader.replace("Bearer ", "");
 
         if (!jwtTokenProvider.validateToken(refreshToken)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("유효하지 않은 리프레시 토큰입니다.");

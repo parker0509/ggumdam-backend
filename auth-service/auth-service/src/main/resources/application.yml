@@ -17,8 +17,8 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jwt:
-    secret: h7iV5u3tG9PfN6wYQlXrZqvAtFsJDw2s8KME+fClTcw=
-    expiration: 86400
+    secret: ${JWT_SECRET}  # ? JWT_SECRET? ?? ????? ??
+    expiration: 86400  # ?: JWT ???? (1?) ?? ??
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect  # MySQL 8? ?? ??
@@ -45,3 +45,9 @@ feign:
       default:
         connectTimeout: 5000  # Feign ????? ?? ????
         readTimeout: 5000     # Feign ????? ?? ????
+
+logging:
+  level:
+    org:
+      springframework:
+        security=DEBUG:

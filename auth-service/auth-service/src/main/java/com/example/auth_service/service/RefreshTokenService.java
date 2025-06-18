@@ -24,4 +24,9 @@ public class RefreshTokenService {
     public void deleteRefreshToken(String email) {
         redisTemplate.delete(email);
     }
+
+    public boolean validate(String email, String token) {
+        String savedToken = redisTemplate.opsForValue().get(email);
+        return savedToken != null && savedToken.equals(token);
+    }
 }
