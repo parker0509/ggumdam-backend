@@ -3,6 +3,8 @@ package com.example.payment_service.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -12,15 +14,12 @@ import lombok.*;
 public class PaymentRecord {
 
     @Id
-    private String impUid;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private Long amount;
-
+    private Long userId;
+    private Long orderId;
+    private int amount;
     private String status;
-
-    private String payMethod;
-
-    private String buyerName;
-
-    private String buyerEmail;
+    private LocalDateTime paidAt;
 }

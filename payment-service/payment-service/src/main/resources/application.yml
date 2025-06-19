@@ -31,3 +31,10 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:10000/eureka
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
