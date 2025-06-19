@@ -1,10 +1,10 @@
 package com.example.order_service.service;
 
 import com.example.order_service.domain.Order;
-import com.example.order_service.dto.OrderRequest;
-import com.example.order_service.dto.OrderResponse;
-import com.example.order_service.dto.UserResponse;
+import com.example.order_service.domain.OrderStatus;
+import com.example.order_service.dto.*;
 import com.example.order_service.feign.UserClient;
+import com.example.order_service.feign.PaymentClient;
 import com.example.order_service.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,31 +18,55 @@ public class OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
+
     @Autowired
     private UserClient userClient;
 
-//✅ createOrder - API
+    @Autowired
+    private PaymentClient paymentClient;
+
     @Transactional
     public OrderResponse CreateOrder(OrderRequest request) {
-
+        // 1. 사용자 검증
         UserResponse user = userClient.getUserById(request.getUserId());
-
-        // 검증
         if (user == null) {
             throw new RuntimeException("존재하지 않는 사용자입니다.");
         }
 
-        System.out.println("user = " + user);
+        // 2. 주문 생성
         Order order = new Order();
         order.setUserId(request.getUserId());
         order.setProjectId(request.getProjectId());
         order.setQuantity(request.getQuantity());
         order.setTotalAmount(request.getTotalAmount());
-        order.setOrderStatus(request.getOrderStatus());
+        order.setOrderStatus(OrderStatus.valueOf("PENDING"));
         order.setLocalDateTime(LocalDateTime.now());
         order.setUpdateAt(LocalDateTime.now());
 
         Order saved = orderRepository.save(order);
+
+        // 3. 결제 요청
+        PaymentRequest paymentRequest = new PaymentRequest();
+        paymentRequest.setUserId(saved.getUserId());
+        paymentRequest.setOrderId(saved.getId());
+        paymentRequest.setAmount((int) saved.getTotalAmount());
+
+        try {
+            PaymentResponse paymentResponse = paymentClient.requestPayment(paymentRequest);
+
+            if ("PAID".equalsIgnoreCase(paymentResponse.getPaymentStatus())) {
+                saved.setOrderStatus(OrderStatus.valueOf("PAID"));
+            } else {
+                saved.setOrderStatus(OrderStatus.valueOf("FAILED"));
+            }
+
+        } catch (Exception e) {
+            saved.setOrderStatus(OrderStatus.valueOf("FAILED"));
+            System.out.println("결제 실패: " + e.getMessage());
+        }
+
+        saved.setUpdateAt(LocalDateTime.now());
+        orderRepository.save(saved);
 
         return new OrderResponse(saved.getId(), saved.getOrderStatus(), saved.getTotalAmount());
     }
