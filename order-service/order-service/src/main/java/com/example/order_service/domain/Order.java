@@ -25,11 +25,15 @@ public class Order {
     @NotNull
     private Long userId;
     @NotNull
-    private Long projectId;
+    private Long rewardId;
     @NotNull
     private int quantity;
     @NotNull
     private int totalAmount;
+    private String recipient;
+    private String phone;
+    private String address;
+    private String addressDetail;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
