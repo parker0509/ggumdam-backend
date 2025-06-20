@@ -9,8 +9,10 @@ public class OrderRequest {
     //Order DTO
 
     private Long userId;
-    private Long projectId;
-    private int quantity;
+    private Long rewardId;
+    private String recipient;
+    private String phone;
+    private String address;
+    private String addressDetail;
     private int totalAmount;
-    private OrderStatus orderStatus;
 }

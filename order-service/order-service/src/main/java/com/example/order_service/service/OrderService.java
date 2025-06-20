@@ -36,10 +36,13 @@ public class OrderService {
         // 2. 주문 생성
         Order order = new Order();
         order.setUserId(request.getUserId());
-        order.setProjectId(request.getProjectId());
-        order.setQuantity(request.getQuantity());
+        order.setRewardId(request.getRewardId());
+        order.setRecipient(request.getRecipient());
+        order.setPhone(request.getPhone());
+        order.setAddress(request.getAddress());
+        order.setAddressDetail(request.getAddressDetail());
         order.setTotalAmount(request.getTotalAmount());
-        order.setOrderStatus(OrderStatus.valueOf("PENDING"));
+        order.setOrderStatus(OrderStatus.PENDING);
         order.setLocalDateTime(LocalDateTime.now());
         order.setUpdateAt(LocalDateTime.now());
 

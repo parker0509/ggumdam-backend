@@ -10,5 +10,9 @@
         <module name="payment-service.payment-service.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="payment-service.payment-service.main~1" target="17" />
+      <module name="payment-service.payment-service.test~1" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
