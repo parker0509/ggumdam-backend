@@ -8,5 +8,4 @@ import java.util.List;
 
 @Repository
 public interface FundingOrderRepository extends JpaRepository<FundingOrder, Long> {
-    List<FundingOrder> findByProjectId(Long projectId);
 }

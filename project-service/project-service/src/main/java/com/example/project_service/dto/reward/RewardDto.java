@@ -16,7 +16,7 @@ import java.util.Optional;
 public class RewardDto {
     private Long id;
     private String title;
-    private String desc;
+    private String description;
     private int price;
     private int shippingFee;
     private String deliveryDate;
@@ -26,7 +26,7 @@ public class RewardDto {
     public RewardDto(Reward reward) {
         this.id = reward.getId();
         this.title = reward.getTitle();
-        this.desc = reward.getDescription();
+        this.description = reward.getDescription();
         this.price = reward.getPrice();
         this.shippingFee = reward.getShippingFee();
         this.deliveryDate = reward.getDeliveryDate() != null ? reward.getDeliveryDate().toString() : null;
@@ -39,7 +39,7 @@ public class RewardDto {
         return RewardDto.builder()
                 .id(reward.getId())
                 .title(reward.getTitle())
-                .desc(reward.getDescription())
+                .description(reward.getDescription())
                 .price(reward.getPrice())
                 .shippingFee(reward.getShippingFee())
                 .deliveryDate(reward.getDeliveryDate() != null ? reward.getDeliveryDate().toString() : null)
