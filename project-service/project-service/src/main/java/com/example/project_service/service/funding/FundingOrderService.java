@@ -1,9 +1,13 @@
 package com.example.project_service.service.funding;
 
 
+import com.example.project_service.domain.free.FreeOrder;
 import com.example.project_service.domain.funding.FundingOrder;
+import com.example.project_service.dto.funding.FundingDto;
 import com.example.project_service.repository.funding.FundingOrderRepository;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -13,27 +17,43 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FundingOrderService {
 
-    private final FundingOrderRepository fundingOrderRepository;
 
-    // 펀딩 성공 여부 체크 후 주문 생성
-    public FundingOrder createFundingOrder(FundingOrder order) {
-        // 예시 로직: 외부에서 펀딩 성공 여부 판단된 경우만 저장
-        if (checkProjectFundingSuccess(order.getProjectId())) {
-            order.setStatus(FundingOrder.FundingStatus.WAITING_PAYMENT);
-            order.setCreatedAt(LocalDateTime.now());
-            return fundingOrderRepository.save(order);
-        } else {
-            throw new IllegalStateException("이 프로젝트는 아직 펀딩에 성공하지 않았습니다.");
-        }
+    private FundingOrderRepository fundingOrderRepository;
+
+    @Autowired
+    public FundingOrderService(FundingOrderRepository fundingOrderRepository) {
+        this.fundingOrderRepository = fundingOrderRepository;
     }
 
-    public List<FundingOrder> getOrdersByProject(Long projectId) {
-        return fundingOrderRepository.findByProjectId(projectId);
+// 상품 생성 DTO 사용
+    public FundingOrder createOrder(FundingDto fundingDto) {
+        FundingOrder fundingOrder = new FundingOrder();
+        fundingOrder.setProductName(fundingDto.getProductName());
+
+        //fundingOrder.setId(fundingDto.getId());
+        // merge 문제 발생 id 신규 등록시 직접 설정 x @GeneratedValue
+
+        fundingOrder.setShortDescription(fundingDto.getShortDescription());
+        fundingOrder.setLikes(0); // 기본값 설정
+        fundingOrder.setImageUrl(fundingDto.getImageUrl());
+        fundingOrder.setOrderDate(LocalDateTime.now());
+        return fundingOrderRepository.save(fundingOrder);
+    }
+
+// 상품 전체 조회
+    public List<FundingOrder> getAllOrders() {
+        return fundingOrderRepository.findAll();
+    }
+
+    public void incrementLikes(Long id) {
+        FundingOrder fundingOrder = fundingOrderRepository.findById(id).orElseThrow(() -> new RuntimeException("Not Found"));
+        fundingOrder.setLikes(fundingOrder.getLikes() + 1);
+        fundingOrderRepository.save(fundingOrder);
+    }
+
+    public FundingOrder findById(Long id) {
+        return fundingOrderRepository.findById(id).orElse(null);
     }
 
     // 임시 예시 메서드
-    private boolean checkProjectFundingSuccess(Long projectId) {
-        // 실제로는 project-service API 호출해서 체크
-        return true; // 지금은 성공한 걸로 가정
-    }
 }
