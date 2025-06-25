@@ -12,4 +12,6 @@ public interface RewardRepository extends JpaRepository<Reward,Long> {
 
     List<Reward> findByFreeOrderId(Long freeOrderId);
 
+    List<Reward> findByFundingOrderId(Long fundingId);
+
 }

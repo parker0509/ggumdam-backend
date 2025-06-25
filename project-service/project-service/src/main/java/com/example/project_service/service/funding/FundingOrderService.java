@@ -26,19 +26,26 @@ public class FundingOrderService {
     }
 
 // 상품 생성 DTO 사용
-    public FundingOrder createOrder(FundingDto fundingDto) {
-        FundingOrder fundingOrder = new FundingOrder();
-        fundingOrder.setProductName(fundingDto.getProductName());
+public FundingOrder createOrder(FundingDto fundingDto) {
+    FundingOrder fundingOrder = new FundingOrder();
+    fundingOrder.setProductName(fundingDto.getProductName());
 
-        //fundingOrder.setId(fundingDto.getId());
-        // merge 문제 발생 id 신규 등록시 직접 설정 x @GeneratedValue
+    // id는 직접 설정 ❌ (DB가 자동 생성)
+    fundingOrder.setAchievement(fundingDto.getAchievement());
+    fundingOrder.setAmountRaised(fundingDto.getAmountRaised());
+    fundingOrder.setParticipants(fundingDto.getParticipants());  // ✅ 수정
+    fundingOrder.setQuantity(fundingDto.getQuantity());          // ✅ 수정
+    fundingOrder.setCompanyName(fundingDto.getCompanyName());
+    fundingOrder.setDaysLeft(fundingDto.getDaysLeft());
+    fundingOrder.setSupporters(fundingDto.getSupporters());      // ✅ 수정
+    fundingOrder.setShortDescription(fundingDto.getShortDescription());
+    fundingOrder.setLikes(0); // 기본값
+    fundingOrder.setImageUrl(fundingDto.getImageUrl());
+    fundingOrder.setOrderDate(LocalDateTime.now());
 
-        fundingOrder.setShortDescription(fundingDto.getShortDescription());
-        fundingOrder.setLikes(0); // 기본값 설정
-        fundingOrder.setImageUrl(fundingDto.getImageUrl());
-        fundingOrder.setOrderDate(LocalDateTime.now());
-        return fundingOrderRepository.save(fundingOrder);
-    }
+    return fundingOrderRepository.save(fundingOrder);
+}
+
 
 // 상품 전체 조회
     public List<FundingOrder> getAllOrders() {
