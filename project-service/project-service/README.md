@@ -1,4 +1,14 @@
-## MSA 구조
-
-project-service - >  gateway-service -> spring cloud -> redis 
-user-service    - > 
+##
+## 06.23 ##
+TODO:
+1. 프론트에 프로젝트 디테일페이지 추가 + // 완료
+2. 펀딩 값 
+3. 직접 결제 
+4. 검색
+5. oAuth 
+6. 회원가입 css
+7. order 주문시 값 넘기기 테스트
+8. 로그아웃 시간 지정
+9. 쿠폰
+10. 배송지
+11. 휴대폰인증하기

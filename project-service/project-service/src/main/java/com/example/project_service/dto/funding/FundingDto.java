@@ -15,17 +15,17 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FundingDto {
-    private Long id;
+
     private String productName;
-    private String shortDescription;
-    private String imageUrl;
+    private int quantity;
+    private LocalDateTime orderDate;
+    private int participants;
     private int achievement;
+    private String companyName;
     private int amountRaised;
     private int daysLeft;
+    private String imageUrl;
+    private String shortDescription;
     private int supporters;
-    private String companyName;
     private int likes;
-    private LocalDateTime FreeOrderDate;
-    private List<RewardDto> rewards;
-
 }

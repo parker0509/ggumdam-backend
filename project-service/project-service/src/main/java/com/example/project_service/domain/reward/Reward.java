@@ -1,6 +1,7 @@
 package com.example.project_service.domain.reward;
 
 import com.example.project_service.domain.free.FreeOrder;
+import com.example.project_service.domain.funding.FundingOrder;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,5 +27,9 @@ public class Reward {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "free_order_id")
     private FreeOrder freeOrder;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "funding_order_id")
+    private FundingOrder fundingOrder;
 }
 

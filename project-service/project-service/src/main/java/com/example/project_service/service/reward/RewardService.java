@@ -1,6 +1,7 @@
 package com.example.project_service.service.reward;
 
 import com.example.project_service.domain.free.FreeOrder;
+import com.example.project_service.domain.funding.FundingOrder;
 import com.example.project_service.domain.reward.Reward;
 import com.example.project_service.dto.reward.RewardDto;
 import com.example.project_service.dto.reward.RewardRequestDto;
@@ -21,9 +22,18 @@ public class RewardService {
         return rewardRepository.findByFreeOrderId(id);
     }
 
-    public RewardDto createReward(RewardRequestDto requestDto, FreeOrder freeOrder) {
+    public List<Reward> getRewardsByFundingId(Long id) {
+        return rewardRepository.findByFundingOrderId(id);}
+
+    public RewardDto createFreeOrderReward(RewardRequestDto requestDto, FreeOrder freeOrder) {
         Reward reward = requestDto.toEntity();
         reward.setFreeOrder(freeOrder);  // 연관관계 설정
+        Reward saved = rewardRepository.save(reward);
+        return RewardDto.from(saved);
+    }
+    public RewardDto createFundingOrderReward(RewardRequestDto requestDto, FundingOrder fundingOrder) {
+        Reward reward = requestDto.toEntity();
+        reward.setFundingOrder(fundingOrder);  // 연관관계 설정
         Reward saved = rewardRepository.save(reward);
         return RewardDto.from(saved);
     }
