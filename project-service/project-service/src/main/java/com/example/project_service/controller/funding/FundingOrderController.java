@@ -4,6 +4,7 @@ package com.example.project_service.controller.funding;
 import com.example.project_service.domain.free.FreeOrder;
 import com.example.project_service.domain.funding.FundingOrder;
 import com.example.project_service.dto.funding.FundingDto;
+import com.example.project_service.dto.funding.FundingUpdateRequest;
 import com.example.project_service.repository.funding.FundingOrderRepository;
 import com.example.project_service.service.funding.FundingOrderService;
 import lombok.RequiredArgsConstructor;
@@ -57,8 +58,11 @@ public class FundingOrderController {
         return ResponseEntity.ok().build();
     }
 
-
-
+    @PostMapping("/update-after-payment")
+    public ResponseEntity<Void> updateFundingAfterPayment(@RequestBody FundingUpdateRequest request) {
+        fundingOrderService.updateFundingAfterPayment(request.getRewardId(), request.getPaidAmount());
+        return ResponseEntity.ok().build();
+    }
 
 
 }

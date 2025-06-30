@@ -16,7 +16,7 @@ public class PaymentRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private Long rewardId;
     private Long userId;
     private Long orderId;
     private int amount;

@@ -1,20 +1,25 @@
 package com.example.payment_service.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class PaymentRequest {
     private Long userId;
     private Long orderId;
     private Long rewardId;
     private int amount;
+    private String impUid;
 
+    @Override
+    public String toString() {
+        return "PaymentRequest{" +
+                "userId=" + userId +
+                ", orderId=" + orderId +
+                ", rewardId=" + rewardId +
+                ", amount=" + amount +
+                ", impUid=" + impUid +
+                '}';
+    }
 }
 

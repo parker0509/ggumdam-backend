@@ -31,6 +31,8 @@ public class LoginService {
 
     public Map<String, String> loginUserService(String email, String password) {
         // (1) 로그인 검증 (생략)
+        LoginVerificationRequest req = new LoginVerificationRequest(email, password);
+        UserResponse user = userClient.verifyLogin(req);
 
         String accessToken = jwtTokenProvider.createToken(email);
         String refreshToken = jwtTokenProvider.createRefreshToken(email); // 리프레시 토큰 생성

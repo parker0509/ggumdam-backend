@@ -13,5 +13,7 @@ public interface ProjectClient {
     @GetMapping("/api/free-orders/rewards/{rewardId}")
     RewardDto getProjectById(@PathVariable("rewardId") Long rewardId);
 
+    @GetMapping("/api/funding-orders/rewards/{rewardId}")
+    RewardDto getFundingProjectById(@PathVariable(name = "rewardId")Long rewardId);
 
 }

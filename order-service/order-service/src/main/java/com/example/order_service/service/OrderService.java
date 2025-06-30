@@ -52,22 +52,10 @@ public class OrderService {
         PaymentRequest paymentRequest = new PaymentRequest();
         paymentRequest.setUserId(saved.getUserId());
         paymentRequest.setOrderId(saved.getId());
+        paymentRequest.setRewardId(saved.getRewardId());
         paymentRequest.setAmount((int) saved.getTotalAmount());
 
-        try {
-            PaymentResponse paymentResponse = paymentClient.requestPayment(paymentRequest);
-
-            if ("PAID".equalsIgnoreCase(paymentResponse.getPaymentStatus())) {
-                saved.setOrderStatus(OrderStatus.valueOf("PAID"));
-            } else {
-                saved.setOrderStatus(OrderStatus.valueOf("FAILED"));
-            }
-
-        } catch (Exception e) {
-            saved.setOrderStatus(OrderStatus.valueOf("FAILED"));
-            System.out.println("결제 실패: " + e.getMessage());
-        }
-
+        System.out.println("입력된 상태 값: " + saved.getOrderStatus());
         saved.setUpdateAt(LocalDateTime.now());
         orderRepository.save(saved);
 

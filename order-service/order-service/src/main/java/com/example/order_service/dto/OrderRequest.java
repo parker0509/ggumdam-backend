@@ -2,9 +2,11 @@ package com.example.order_service.dto;
 
 
 import com.example.order_service.domain.OrderStatus;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+
+
+@Data
 public class OrderRequest {
     //Order DTO
 
@@ -15,4 +17,5 @@ public class OrderRequest {
     private String address;
     private String addressDetail;
     private int totalAmount;
+    private int paidAmount;
 }

@@ -28,4 +28,5 @@ public class FundingDto {
     private String shortDescription;
     private int supporters;
     private int likes;
+    private int goalAmount;
 }

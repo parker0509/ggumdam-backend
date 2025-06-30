@@ -5,10 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df3b73ba-8809-441b-9d6b-53533f2f3475" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/../auth-service/auth-service/src/main/java/com/example/auth_service/service/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/auth-service/src/main/java/com/example/auth_service/service/LoginService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/domain/OrderStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/domain/OrderStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/dto/OrderRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/dto/OrderRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/dto/OrderResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/dto/OrderResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/feign/ProjectFeign.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/feign/ProjectFeign.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payment-service/payment-service/src/main/java/com/example/payment_service/service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../payment-service/payment-service/src/main/java/com/example/payment_service/service/PaymentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../payment-service/payment-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../payment-service/payment-service/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../project-service/project-service/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/controller/funding/FundingOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/controller/funding/FundingOrderController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/controller/reward/RewardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/controller/reward/RewardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/domain/funding/FundingOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/domain/funding/FundingOrder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/domain/reward/Reward.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/domain/reward/Reward.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/dto/funding/FundingDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/dto/funding/FundingDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/repository/reward/RewardRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/repository/reward/RewardRepository.java" afterDir="false" />
@@ -85,6 +95,30 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="OrderControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/order-service" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.example.order_service.controller.OrderControllerTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
@@ -101,6 +135,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.OrderControllerTest" />
         <item itemvalue="애플리케이션.OrderServiceApplication" />
         <item itemvalue="Docker.order-service: Compose 배포" />
       </list>
@@ -125,11 +160,10 @@
           <line>11</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/dto/OrderRequest.java</url>
-          <line>10</line>
-          <properties field="userId" class="com.example.order_service.dto.OrderRequest" />
-          <option name="timeStamp" value="10" />
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/feign/ProjectFeign.java</url>
+          <line>17</line>
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

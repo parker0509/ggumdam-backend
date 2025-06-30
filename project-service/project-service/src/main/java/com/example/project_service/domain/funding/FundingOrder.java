@@ -28,5 +28,6 @@ public class FundingOrder {
     private int supporters;
     private int likes;
 
+    private int goalAmount; // 목표 금액
     // getters & setters
 }
