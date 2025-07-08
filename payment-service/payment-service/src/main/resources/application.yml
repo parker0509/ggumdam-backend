@@ -1,0 +1,40 @@
+server:
+  port: 8015
+
+spring:
+  application:
+    name: payment-service
+
+  iamport:
+    api:
+      key: ${IAMPORT_API_KEY}
+      secret: ${IAMPORT_API_SECRET} # ???? API Secret Key
+
+  datasource:
+    url: jdbc:mysql://localhost:3400/paymentDB?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root
+    password: qwer1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect  # ? ?? ??!!0101
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:10000/eureka
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000

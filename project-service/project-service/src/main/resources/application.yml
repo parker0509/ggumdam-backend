@@ -1,0 +1,35 @@
+server:
+  port: 8006
+
+spring:
+  application:
+    name: project-service
+
+
+  elasticsearch:
+    uris: http://localhost:9200
+    username: elastic
+    password: qwer1234 # 기본 비밀번호, 실제 배포 시 보안 설정 필요
+
+
+  datasource:
+    url: jdbc:mysql://localhost:3310/projectDB?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root
+    password: qwer1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect  # ? ?? ??!!
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:10000/eureka

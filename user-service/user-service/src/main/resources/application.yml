@@ -1,0 +1,40 @@
+server:
+  port: 8005
+
+spring:
+  application:
+    name: user-service
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: user-service-group
+
+  jwt:
+    secret: ${JWT_SECRET}  # ✅ 직접 입력
+    refresh: ${JWT_REFRESH}
+
+  datasource:
+    url: jdbc:mysql://localhost:3307/userDB?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root
+    password: qwer1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect  # 이 부분 추가!!
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:10000/eureka
+

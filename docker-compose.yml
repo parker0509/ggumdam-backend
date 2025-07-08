@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  eureka-server:
+    container_name: eureka-server
+    build:
+      context: EurekaServer/EurekaServer  # Eureka 서버의 소스가 있는 경로
+    ports:
+      - "10000:10000"
+    networks:
+      - backend
+
+  user-service:
+    container_name: user-service
+    build:
+      context: user-service/user-service  # user-service의 소스가 있는 경로
+    ports:
+      - "8005:8005"
+    networks:
+      - backend
+
+  apigateway:
+    container_name: apigateway-service
+    build:
+      context: apigateway/apigateway  # user-service의 소스가 있는 경로
+    ports:
+      - "9000:9000"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
