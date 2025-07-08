@@ -13,11 +13,56 @@ spring:
         - id: user-service
           uri: lb://user-service
           predicates:
-            - Path=/user/**
+            - Path=/api/user/**
+
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/api/auth/**
+
+        - id: oauth2-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/oauth2/**
+
+        - id: project-funding-orders
+          uri: lb://project-service
+          predicates:
+            - Path=/api/funding-orders/**
+
+        - id: project-rewards
+          uri: lb://project-service
+          predicates:
+            - Path=/api/rewards/**
+
+        - id: project-funding-rewards
+          uri: lb://project-service
+          predicates:
+            - Path=/api/funding-orders/rewards/**
+
+        - id: project-free-order
+          uri: lb://project-service
+          predicates:
+            - Path=/api/free-orders/**
+
+        - id: project-free-order-rewards
+          uri: lb://project-service
+          predicates:
+            - Path=/api/free-orders/rewards/**
+
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/api/orders/**
+
+        - id: payment-service
+          uri: lb://payment-service
+          predicates:
+            - Path=/api/payments/**
 
 eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://eureka-server:10000/eureka
+      defaultZone: http://localhost:10000/eureka
