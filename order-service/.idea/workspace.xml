@@ -5,25 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df3b73ba-8809-441b-9d6b-53533f2f3475" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/../auth-service/auth-service/src/main/java/com/example/auth_service/service/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-service/auth-service/src/main/java/com/example/auth_service/service/LoginService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EurekaServer/EurekaServer/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../EurekaServer/EurekaServer/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../apigateway/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../apigateway/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../apigateway/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../apigateway/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../apigateway/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../apigateway/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../apigateway/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../apigateway/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../apigateway/apigateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../apigateway/apigateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/order-service.order-service.main~1.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/domain/OrderStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/domain/OrderStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/dto/OrderRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/dto/OrderRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/dto/OrderResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/dto/OrderResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/feign/ProjectFeign.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/feign/ProjectFeign.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/com/example/order_service/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../payment-service/payment-service/src/main/java/com/example/payment_service/service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../payment-service/payment-service/src/main/java/com/example/payment_service/service/PaymentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../payment-service/payment-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../payment-service/payment-service/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../project-service/project-service/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payment-service/.idea/modules/payment-service.payment-service.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/controller/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/controller/ProjectController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/controller/free/FreeOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/controller/free/FreeOrderController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/controller/funding/FundingOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/controller/funding/FundingOrderController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/controller/reward/RewardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/controller/reward/RewardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/domain/funding/FundingOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/domain/funding/FundingOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/domain/reward/Reward.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/domain/reward/Reward.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/dto/funding/FundingDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/dto/funding/FundingDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/repository/reward/RewardRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/repository/reward/RewardRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/service/funding/FundingOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/service/funding/FundingOrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/service/reward/RewardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project-service/project-service/src/main/java/com/example/project_service/service/reward/RewardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-service/user-service/src/main/java/com/example/user_service/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../user-service/user-service/src/main/java/com/example/user_service/config/SecurityConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,17 +69,17 @@
     <option name="showLibraryContents" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/my-project/order-service",
-    "show.migrate.to.gradle.popup": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/my-project/order-service&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="애플리케이션.OrderServiceApplication">
     <configuration name="OrderServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.order_service.OrderServiceApplication" />

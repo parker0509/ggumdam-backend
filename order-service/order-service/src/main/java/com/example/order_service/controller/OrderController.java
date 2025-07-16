@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/orders")
 public class OrderController {
@@ -24,14 +23,15 @@ public class OrderController {
     private ProjectFeign projectFeign;  // Feign Client 주입
 
     @PostMapping
-    public ResponseEntity<OrderResponse> createOrders(@Valid @RequestBody OrderRequest orderRequest) {
+    public ResponseEntity<OrderResponse> createOrders(@RequestBody OrderRequest orderRequest) {
         OrderResponse orderResponse = orderService.CreateOrder(orderRequest);
-
+        System.out.println("orderRequest = " + orderRequest);
         try {
             FundingUpdateRequest updateRequest = new FundingUpdateRequest();
             updateRequest.setRewardId(orderRequest.getRewardId());
             updateRequest.setPaidAmount(orderRequest.getPaidAmount());  // 결제 금액
 
+            System.out.println("updateRequest = " + updateRequest);
             projectFeign.updateFundingAfterPayment(updateRequest);
         } catch (Exception e) {
             System.err.println("project-service 펀딩 업데이트 실패: " + e.getMessage());

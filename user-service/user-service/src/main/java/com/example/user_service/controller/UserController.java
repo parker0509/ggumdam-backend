@@ -23,7 +23,6 @@ import java.util.Optional;
  * 사용자 관련 API를 처리하는 컨트롤러입니다.
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/user")
 public class UserController {
 

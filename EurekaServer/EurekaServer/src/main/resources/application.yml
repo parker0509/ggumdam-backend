@@ -11,5 +11,3 @@ eureka:
     fetch-registry: false
     service-url:
       defaultZone: http://localhost:10000/eureka
-    instance:
-      hostname: eureka-server

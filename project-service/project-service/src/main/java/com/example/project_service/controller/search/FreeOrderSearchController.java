@@ -1,24 +1,39 @@
 package com.example.project_service.controller.search;
 
 import com.example.project_service.repository.search.FreeOrderSearchRepository;
+import com.example.project_service.repository.search.FundingOrderSearchRepository;
 import com.example.project_service.search.FreeOrderDocument;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/search/free")
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/api/search")
 @RequiredArgsConstructor
 public class FreeOrderSearchController {
 
-    private final FreeOrderSearchRepository repository;
+    private final FreeOrderSearchRepository freeOrderRepository;
+
+    private final FundingOrderSearchRepository fundingOrderSearchRepository;
 
     @GetMapping
-    public List<FreeOrderDocument> search(@RequestParam(name = "keyword") String keyword) {
-        return repository.findByTitleContaining(keyword);
+    public List<?> search(
+    @RequestParam (name ="type") String type,
+    @RequestParam(name ="keyword") String keyword){
+        switch (type.toLowerCase()){
+            case "free":
+                return freeOrderRepository.findByTitleContaining(keyword);
+            case"funding":
+                return fundingOrderSearchRepository.findByTitleContaining(keyword);
+            default:
+                throw new IllegalArgumentException("지원하지 않는 검색 타입입니다.");
+        }
     }
+/*
+    @GetMapping
+    public List<FreeOrderDocument> search(@RequestParam(name = "keyword") String keyword) {
+        return FreeOrderRepository.findByTitleContaining(keyword);
+    }*/
 }

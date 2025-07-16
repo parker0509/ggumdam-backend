@@ -17,7 +17,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/projects")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000") // React 연동을 위해 CORS 설정
 public class ProjectController {
 
     private final ProjectService projectService;

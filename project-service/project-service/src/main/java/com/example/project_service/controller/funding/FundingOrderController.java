@@ -17,7 +17,6 @@ import java.util.List;
  * 펀딩 주문(FundingOrder)에 대한 REST 컨트롤러
  * - 펀딩 생성, 목록 조회, 단건 조회, 좋아요 증가, 결제 이후 상태 업데이트 처리
  */
-@CrossOrigin(origins = "http://localhost:3000")  // 프론트엔드 CORS 허용
 @RestController
 @RequestMapping("/api/funding-orders")
 @RequiredArgsConstructor

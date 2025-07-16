@@ -7,8 +7,13 @@ spring:
 
   application:
     name: apigateway
+
   cloud:
     gateway:
+      default-filters:
+        - RemoveRequestHeader=Cookie
+        - RemoveRequestHeader=Set-Cookie
+        - PreserveHostHeader
       routes:
         - id: user-service
           uri: lb://user-service
@@ -49,6 +54,21 @@ spring:
           uri: lb://project-service
           predicates:
             - Path=/api/free-orders/rewards/**
+
+        - id: project-free-order-search
+          uri: lb://project-service
+          predicates:
+            - Path=/api/search/free
+
+        - id: project-type-search
+          uri: lb://project-service
+          predicates:
+            - Path=/api/search/**
+
+        - id: project-funding-order-search
+          uri: lb://project-service
+          predicates:
+            - Path=/api/search/funding/**
 
         - id: order-service
           uri: lb://order-service

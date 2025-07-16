@@ -9,10 +9,17 @@
         </processorPath>
         <module name="order-service.order-service.main~1" />
       </profile>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$PROJECT_DIR$/../../caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.38/57f8f5e02e92a30fd21b80cbd426a4172b5f8e29/lombok-1.18.38.jar" />
+        </processorPath>
+        <module name="order-service.order-service.main" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="order-service.order-service.main" target="17" />
-      <module name="order-service.order-service.test" target="17" />
+      <module name="order-service.order-service.main~1" target="17" />
+      <module name="order-service.order-service.test~1" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>
