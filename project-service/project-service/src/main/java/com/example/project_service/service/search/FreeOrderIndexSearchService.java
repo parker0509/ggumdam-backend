@@ -1,7 +1,5 @@
 package com.example.project_service.service.search;
 
-import com.example.project_service.domain.free.FreeOrder;
-import com.example.project_service.mapper.FreeOrderMapper;
 import com.example.project_service.repository.free.FreeOrderRepository;
 import com.example.project_service.repository.search.FreeOrderSearchRepository;
 import com.example.project_service.search.FreeOrderDocument;
@@ -28,6 +26,8 @@ public class FreeOrderIndexSearchService implements CommandLineRunner {
                     .title(freeOrder.getProductName())  // 예시 필드
                     .summary(freeOrder.getShortDescription())
                     .imageUrl(freeOrder.getImageUrl())
+                    .amountRaised(freeOrder.getAmountRaised())
+                    .companyName(freeOrder.getCompanyName())
                     .build();
             elasticRepository.save(document);
         });

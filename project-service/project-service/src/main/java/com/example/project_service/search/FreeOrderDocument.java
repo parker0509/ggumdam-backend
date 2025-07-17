@@ -13,4 +13,6 @@ public class FreeOrderDocument {
     private String summary;
     private String companyName;
     private String imageUrl;
+    private int amountRaised;
+    private String productName;
 }
