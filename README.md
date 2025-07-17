@@ -39,7 +39,7 @@
 
 ## 🔄 통신 구조 요약
 
-```plaintext
+```
 React (3000)
    ↓ (Proxy)
 Gateway Service (9000)
@@ -52,28 +52,14 @@ Auth (8000, Kafka 9092)  User (8005) ...
 Project (8006)           Order (8010)
 Payment (8015)
 
-각 서비스는 개별 MySQL DB와 연결됨.
-🔍 ELK 로그 수집 구성
-Port	서비스 이름	설명
-9200	Elasticsearch	로그 인덱싱 및 검색
-5044	Logstash (input)	Filebeat → Logstash 수신 포트
-9600	Logstash (monitor)	Logstash 상태 모니터링
-5601	Kibana	시각화 대시보드 및 로그 탐색
+```
 
-✅ ELK는 Filebeat → Logstash → Elasticsearch → Kibana 구조로 연동됩니다.
-✅ Spring Boot 로그는 JSON 포맷으로 logback-spring.xml에 정의 후 Filebeat로 수집됩니다.
+---
 
-🛰️ Kafka 구성
-Port	구성 요소	설명
-9092	Apache Kafka	인증 관련 이벤트 처리 (auth-service)
+```
 
-Kafka는 인증 성공/실패, 로그인 로그, 알림 등 이벤트 전송용으로 활용됩니다.
-추후 주문/결제 이벤트로 확장 예정입니다.
+📁 Git Repository 구조
 
-📁 Git Repository 구조 (예시)
-sql
-복사
-편집
 root/
 ├── gateway-service/
 ├── eureka-service/
@@ -92,3 +78,5 @@ root/
 │   ├── kafka/
 ├── docker-compose.yml
 └── README.md
+
+```
