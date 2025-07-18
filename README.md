@@ -84,4 +84,5 @@ root/
 
 ### 어플리케이션 아키텍처 
 
-<img width="1654" height="1169" alt="제목 없는 다이어그램 drawio (16)" src="https://github.com/user-attachments/assets/6771b906-397d-4c70-a484-8d2459a17342" />
+<img width="1654" height="1169" alt="제목 없는 다이어그램 drawio (17)" src="https://github.com/user-attachments/assets/d9cef370-1f99-46e2-a85f-45759b330211" />
+
