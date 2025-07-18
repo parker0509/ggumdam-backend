@@ -80,3 +80,4 @@ root/
 └── README.md
 
 ```
+<img width="1654" height="1169" alt="제목 없는 다이어그램 drawio (16)" src="https://github.com/user-attachments/assets/6771b906-397d-4c70-a484-8d2459a17342" />
