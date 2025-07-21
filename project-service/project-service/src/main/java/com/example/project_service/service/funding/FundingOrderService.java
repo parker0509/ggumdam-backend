@@ -6,6 +6,8 @@ import com.example.project_service.dto.funding.FundingDto;
 import com.example.project_service.repository.funding.FundingOrderRepository;
 import com.example.project_service.repository.reward.RewardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,8 +60,8 @@ public class FundingOrderService {
      *
      * @return 모든 FundingOrder 리스트
      */
-    public List<FundingOrder> getAllOrders() {
-        return fundingOrderRepository.findAll();
+    public Page<FundingOrder> getAllOrders(Pageable pageable) {
+        return fundingOrderRepository.findAll(pageable);
     }
 
     /**

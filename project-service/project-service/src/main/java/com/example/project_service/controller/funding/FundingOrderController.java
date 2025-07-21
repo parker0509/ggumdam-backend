@@ -8,6 +8,9 @@ import com.example.project_service.dto.funding.FundingUpdateRequest;
 import com.example.project_service.repository.funding.FundingOrderRepository;
 import com.example.project_service.service.funding.FundingOrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,8 +35,8 @@ public class FundingOrderController {
      * @return 모든 FundingOrder 목록
      */
     @GetMapping
-    public ResponseEntity<List<FundingOrder>> getAll() {
-        return ResponseEntity.ok(fundingOrderService.getAllOrders());
+    public ResponseEntity<Page<FundingOrder>> getAll(@PageableDefault(size = 10)Pageable pageable) {
+        return ResponseEntity.ok(fundingOrderService.getAllOrders(pageable));
     }
 
     /**
