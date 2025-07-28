@@ -84,7 +84,7 @@ root/
 
 ### 아키텍처 
 
-<img width="1654" height="1169" alt="제목 없는 다이어그램 drawio (17)" src="https://github.com/user-attachments/assets/d9cef370-1f99-46e2-a85f-45759b330211" />
-<img width="400" height="200" alt="image" src="https://github.com/user-attachments/assets/5fa20f32-d104-4a5a-997a-dc563f1b4e53" />
-<img width="400" height="200" alt="image" src="https://github.com/user-attachments/assets/296dd24a-265b-431c-938f-e4539102907a" />
+apply <img width="1654" height="1169" alt="제목 없는 다이어그램 drawio (17)" src="https://github.com/user-attachments/assets/d9cef370-1f99-46e2-a85f-45759b330211" />
+url <img width="1650" height="1100" alt="image" src="https://github.com/user-attachments/assets/5fa20f32-d104-4a5a-997a-dc563f1b4e53" />
+er <img width="1650" height="1100" alt="image" src="https://github.com/user-attachments/assets/296dd24a-265b-431c-938f-e4539102907a" />
 
