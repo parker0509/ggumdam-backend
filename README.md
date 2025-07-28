@@ -53,7 +53,6 @@ Project (8006)           Order (8010)
 Payment (8015)
 
 ```
-<img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/5cdea345-6be2-4c1b-9ad1-64485290d978" />
 
 ---
 
